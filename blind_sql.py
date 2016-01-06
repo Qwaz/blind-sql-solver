@@ -3,7 +3,7 @@ import json
 import requests
 
 parser = argparse.ArgumentParser(description='Blind SQL Helper')
-parser.add_argument('--mode', choices=['integer', 'character'], default='character')
+parser.add_argument('--mode', choices=['integer', 'character', 'character-all'], default='character')
 parser.add_argument('--min', default=0, type=int)
 parser.add_argument('--max', default=255, type=int)
 parser.add_argument('--debug', action='store_true')
@@ -30,7 +30,7 @@ if args.mode == 'integer':
 			print('%d fail' % t)
 			now_max = t - 1
 	print(now_min - 1)
-elif args.mode == 'character':
+elif args.mode == 'character' or args.mode == 'character-all':
 	key = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	for c in key:
 		temp_url = args.url.replace('@@@', c)
@@ -39,6 +39,7 @@ elif args.mode == 'character':
 			print(r.text)
 		if args.detect in r.text:
 			print(c)
-			break
+			if args.mode == 'character':
+				break
 		else:
 			print('%c fail' % c)
