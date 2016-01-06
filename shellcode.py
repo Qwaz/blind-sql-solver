@@ -12,6 +12,7 @@ def yes_no_prompt(question):
 			print('Please respond with \'y\' or \'n\'.')
 
 parser = argparse.ArgumentParser(description='Shellcode extractor')
+parser.add_argument('--begin', default='main')
 parser.add_argument('input')
 
 args = parser.parse_args()
@@ -30,7 +31,7 @@ else:
 		lines = block.split('\n')
 		block_heads = re.split(r'[ <>:]+', lines[0])
 		if not main_found:
-			if len(block_heads) >= 2 and block_heads[1] == 'main':
+			if len(block_heads) >= 2 and block_heads[1] == args.begin:
 				main_found = True
 			else:
 				continue
