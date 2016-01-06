@@ -38,7 +38,8 @@ else:
 		if yes_no_prompt('include '+block_heads[1]+'?'):
 			for line in lines[1:]:
 				for code in line.split('\t')[1].strip().split():
-					result += r'\x'+code
+					if code != '...':
+						result += r'\x'+code
 		else:
 			break
 	if r'\x00' in result:
