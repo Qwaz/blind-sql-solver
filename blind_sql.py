@@ -31,7 +31,7 @@ if args.mode == 'integer':
 			now_max = t - 1
 	print(now_min - 1)
 elif args.mode == 'character':
-	key = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+	key = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	for c in key:
 		temp_url = args.url.replace('@@@', c)
 		r = requests.get(temp_url, cookies=args.cookies)
