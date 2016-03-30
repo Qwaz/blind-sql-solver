@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import argparse
 import re
 from distutils.util import strtobool
@@ -20,6 +20,7 @@ args = parser.parse_args()
 
 process = Popen(["objdump", "-d", args.input], stdout=PIPE)
 (output, err) = process.communicate()
+output = output.strip()
 exit_code = process.wait()
 
 if exit_code != 0:
